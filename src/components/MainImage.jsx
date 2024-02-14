@@ -8,8 +8,11 @@ export default function MainImage() {
 
 	const handleClick = (e) => {
 		const {pageX, pageY} = e;
+		const top = pageY - 50/2;
+		const left = pageX - 50/2;
+
 		console.log(pageX, pageY);
-		setSquare(<div className="targetArea" style={{ left: pageX, top: pageY }}>{pageX}, {pageY}</div>);
+		setSquare(<div className="targetArea" style={{ left: left, top: top }}>{pageX}, {pageY}</div>);
 	}
 
 	return (
