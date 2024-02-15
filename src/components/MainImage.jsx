@@ -5,41 +5,61 @@ import { useState } from 'react';
 export default function MainImage() {
 	const [square, setSquare] = useState({});
 	const squareSize = 56;
-	const moonCoordinates = { x: 284, y: 170 };
+	const moonCoordinates = { x: 246, y: 134 };
+
 
 	const handleClick = (e) => {
-		const {pageX, pageY} = e;
-		const top = pageY - squareSize/2;
-		const left = pageX - squareSize/2;
+		const rect = e.target.getBoundingClientRect();
+		const {clientX, clientY} = e;
+		const {x, y} = getCoordinates(clientX, clientY, rect);
 
-		if (square.coordinates && isCoordinateInsideSquare(left, top, square)) {
-			console.log(true);
-			return true;
+
+		if (isCoordinateInsideSquare(x, y, moonCoordinates)) {
+			setSquare({});
+			return;
 		}
 
-		console.log(pageX, pageY);
+		console.log(x, y);
+
 		setSquare((p) => ({
 					...p,
-					coordinates: { left, top },
+					coordinates: { x, y },
 					element: (
-						<div className="targetArea" style={{ left: left, top: top }}>
-							{pageX}, {pageY}
+						<div className="targetArea" style={{ left: x, top: y }}>
 						</div>
 					),
 		}));
 	}
+	const getCoordinates = (clientX, clientY, clientRect) => {
+		const relativeX = clientX - clientRect.left;
+		const relativeY = clientY - clientRect.top;
 
-	const isCoordinateInsideSquare = (x, y, square) => {
-		const squareLeft = square.coordinates.left;
-		const squareTop = square.coordinates.top;
+		const top = relativeY - squareSize/2;
+		const left = relativeX - squareSize/2;
 
-		return (
-			x >= squareLeft &&
-			x <= squareLeft + squareSize &&
-			y >= squareTop &&
-			y <= squareTop + squareSize
-		);
-	};
+		const {x, y} = checkImageBorder(left, top, clientRect);
+
+		return {x, y};
+	}
+
+  const checkImageBorder = (x, y, rect) => {
+    x = x < 0 ? 0 : x > rect.width - squareSize ? rect.width - squareSize : x;
+    y = y < 0 ? 0 : y > rect.height - squareSize ? rect.height - squareSize : y;
+
+    return { x, y };
+  };
+
+  const isCoordinateInsideSquare = (x, y, square) => {
+		square.x -= squareSize/2;
+		square.y -= squareSize/2;
+
+    return (
+      x >= square.x &&
+      x <= square.x + squareSize &&
+      y >= square.y &&
+      y <= square.y + squareSize
+    );
+  };
 
 	return (
 		<>
