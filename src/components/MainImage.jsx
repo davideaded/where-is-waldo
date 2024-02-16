@@ -1,6 +1,7 @@
 import waldo from '../assets/waldo.png';
 import '../styles/mainimage.css';
 import { useState } from 'react';
+import GuessingArea from './GuessingArea.jsx';
 
 export default function MainImage() {
 	const [square, setSquare] = useState({});
@@ -25,8 +26,7 @@ export default function MainImage() {
 					...p,
 					coordinates: { x, y },
 					element: (
-						<div className="targetArea" style={{ left: x, top: y }}>
-						</div>
+						<GuessingArea coords={{x, y}}/>
 					),
 		}));
 	}

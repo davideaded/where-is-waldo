@@ -1,0 +1,32 @@
+.targetArea {
+	position: absolute;
+	background-color: rgba(0, 0, 255, 0.7);
+	border: 3px dotted red;
+	width: 50px;
+	height: 50px;
+	pointer-events: none;
+}
+
+.guessMenu {
+	position: absolute;
+	background-color: rgba(0, 0, 255, 0.7);
+	border: 3px dotted red;
+	text-align: left;
+	font-size: 43px;
+	color: white;
+}
+
+.guessMenu > ul {
+	list-style-type: none;
+	padding: 3px;
+	margin: 0;
+	cursor: pointer;
+}
+
+.guessMenu > h1 {
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	font-size: 30px;
+	color: white;
+}
