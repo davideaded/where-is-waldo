@@ -1,14 +1,34 @@
 import { useState } from 'react';
 import '../styles/guessingarea.css';
+import Modal from './Modal.jsx';
 
 function GuessMenu({coords}) {
+	const [modalState, setModalState] = useState({isOpen: false, isCorrect: false});
 	const [showGuessMenu, setShowGuessMenu] = useState(false);
-	const characters = ["waldo", "jhon", "doe"];
+	const characters = ["Guts", "Bender", "Pyramid Head"];
+
+  const handleCloseModal = () => {
+		setModalState(p => {
+			return { ...p, isOpen: false };
+		});
+  };
 
 	const handleGuessClick = (e) => {
-		console.log(e.target.innerText, coords);
+		const targetChar = e.target;
+		targetChar.style.color = "green";
+
 		// make call to the backend
 		setShowGuessMenu(false);
+
+		setModalState(p => {
+			return { 
+				...p,
+				isOpen: true,
+				isCorrect: false,
+				textTitle: "Correct guess!",
+				text: `You've found ${targetChar.innerText}!`
+			};
+		});
 	}
 
 	return (
@@ -23,7 +43,16 @@ function GuessMenu({coords}) {
 					))}
 				</ul>
 				:
-				<h1 onClick={() => setShowGuessMenu(true)}>⬇</h1>
+				<>
+					<h1 onClick={() => setShowGuessMenu(true)}>⬇</h1>
+
+					<Modal isOpen={modalState.isOpen} 
+						onClose={handleCloseModal}
+						correctGuess={modalState.isCorrect}>
+							<h2>{modalState.textTitle}</h2>
+							<p>{modalState.text}</p>
+					</Modal>
+				</>
 			}
 		</div>
 	)

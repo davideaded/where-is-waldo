@@ -1,4 +1,4 @@
-import waldo from '../assets/waldo.png';
+import waldo from '../assets/waldo2.jpg';
 import '../styles/mainimage.css';
 import { useState } from 'react';
 import GuessingArea from './GuessingArea.jsx';

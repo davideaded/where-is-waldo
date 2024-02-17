@@ -1,4 +1,9 @@
 .container {
 	position: relative;
+	margin: auto;
+	width: 80%;
 }
 
+.container img {
+	width: 100%;
+}

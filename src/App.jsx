@@ -1,8 +1,8 @@
-import MainImage from './components/MainImage.jsx';
+import Home from './components/Home.jsx';
 
 function App() {
 	return (
-		<MainImage />
+		<Home />
 	)
 }
 export default App

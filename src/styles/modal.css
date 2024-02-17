@@ -1,0 +1,34 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	font-size: 20px;
+}
+
+.correctGuess {
+  background: #08c421;
+  padding: 20px;
+  border-radius: 8px;
+	color: white;
+}
+
+.incorrectGuess {
+  background: #cf081f;
+	color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.closeButton {
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  color: #555;
+	background-color: #eddddf;
+}
