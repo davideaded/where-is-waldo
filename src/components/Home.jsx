@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Characters from './Characters.jsx';
+import Chronometer from './Chronometer.jsx';
 import '../styles/home.css';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
 			<Link to="game">
 				<button>Play</button>
 			</Link>
+		<Chronometer />
 		</div>
 	)
 	
