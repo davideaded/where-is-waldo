@@ -1,0 +1,17 @@
+table {
+	background-color: whitesmoke;
+	font-size: 30px;
+	margin: 14px auto;
+	border: 2px solid black;
+  border-collapse: separate;
+  border-spacing: 10px;
+  width: 100%;
+}
+
+thead {
+	color: black;
+}
+
+table td {
+	color: black;
+}

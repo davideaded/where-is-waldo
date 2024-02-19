@@ -1,0 +1,11 @@
+.submitNameBtn {
+	width: 100px;
+	margin: 3px;
+	font-size: 20px;
+	height: 43px;
+}
+
+input {
+	height: 43px;
+	font-size: 20px;
+}
