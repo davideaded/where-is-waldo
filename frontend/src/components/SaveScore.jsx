@@ -14,7 +14,27 @@ export default function SaveScore() {
   };
 
 	const handleSubmition = () => {
-		console.log(name);
+		const url = 'http://localhost:3000/api/players'
+
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ player: { name: name, completion_time_in_seconds: 220 } })
+		})
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error('Network response was not ok');
+			})
+			.then((data) => {
+				console.log('POST request successful');
+			})
+			.catch((error) => {
+				console.error('Error during POST request:', error);
+			});
 	}
 
 	const handleInputChange = (e) => {
