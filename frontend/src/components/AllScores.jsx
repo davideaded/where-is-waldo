@@ -29,7 +29,6 @@ useEffect(() => {
 	function formatTime(seconds) {
 		const minutes = Math.floor(seconds / 60);
 		const remainingSeconds = seconds % 60;
-		const milliseconds = seconds * 1;
 
 		const formattedTime = `${minutes}m${remainingSeconds}s`;
 

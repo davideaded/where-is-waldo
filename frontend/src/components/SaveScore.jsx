@@ -3,7 +3,7 @@ import Modal from './Modal.jsx';
 import AllScores from './AllScores.jsx';
 import '../styles/savescore.css';
 
-export default function SaveScore() {
+export default function SaveScore({time}) {
 	const [modalState, setModalState] = useState({isOpen: true, isCorrect: true});
 	const [name, setName] = useState('');
 	const [postStatus, setPostStatus] = useState('');
@@ -22,7 +22,7 @@ export default function SaveScore() {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ player: { name: name, completion_time_in_seconds: 220 } })
+			body: JSON.stringify({ player: { name: name, completion_time_in_seconds: time } })
 		})
 			.then((response) => {
 				if (response.ok) {
@@ -43,11 +43,20 @@ export default function SaveScore() {
 		setName(e.target.value);
 	}
 
+	function formatTime(seconds) {
+		const minutes = Math.floor(seconds / 60);
+		const remainingSeconds = seconds % 60;
+
+		const formattedTime = `${minutes}m${remainingSeconds}s`;
+
+		return formattedTime;
+	}
+
 	return (
 		<Modal isOpen={modalState.isOpen} 
 		onClose={handleCloseModal}
 		correctGuess={modalState.isCorrect}>
-			<h2>You made it in 00:20:30!</h2>
+			<h2>You made it in {formatTime(time)}!</h2>
 			<input 
 				placeholder="enter your name"
 				value={name}

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import Characters from './Characters.jsx';
-import Chronometer from './Chronometer.jsx';
 import AllScores from './AllScores.jsx';
 import '../styles/home.css';
 

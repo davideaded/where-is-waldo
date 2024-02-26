@@ -1,5 +1,5 @@
 class Api::PlayersController < ApplicationController
-  before_action :set_player, only: %i[show update destroy]
+  before_action :set_player, only: :show
 
   def index
     @players = Player.all
@@ -18,19 +18,6 @@ class Api::PlayersController < ApplicationController
     else
       render json: @player.errors, status: :unprocessable_entity
     end
-  end
-
-  def update
-    if @player.update(player_params)
-      render json: @player
-    else
-      render json: @player.errors, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @player.destroy
-    head :no_content
   end
 
   private

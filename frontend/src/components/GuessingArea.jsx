@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import '../styles/guessingarea.css';
 import Modal from './Modal.jsx';
+import SaveScore from './SaveScore.jsx';
 
-export default function GuessingArea({coords}) {
+export default function GuessingArea({coords, time}) {
 	const [modalState, setModalState] = useState({isOpen: false, isCorrect: false});
 	const [showGuessMenu, setShowGuessMenu] = useState(false);
 	const [showError, setShowError] = useState(false);
@@ -50,6 +51,10 @@ export default function GuessingArea({coords}) {
 				text: isGuessCorrect ? `You've found ${e.target.innerText}!` : "Try Again!"
 			};
 		});
+	}
+
+	if (characters[0] === undefined) {
+		return <SaveScore time={time.seconds} />
 	}
 
 	return (

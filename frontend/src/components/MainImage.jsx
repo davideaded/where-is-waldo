@@ -1,13 +1,32 @@
 import waldo from '../assets/waldo2.jpg';
 import '../styles/mainimage.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GuessingArea from './GuessingArea.jsx';
-import Chronometer from './Chronometer.jsx';
 
 export default function MainImage() {
 	const [square, setSquare] = useState({});
 	const squareSize = 56;
+  const [time, setTime] = useState({ minutes: 0, seconds: 0 });
 
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setTime(prevTime => {
+				const newSeconds = prevTime.seconds + 1;
+				const newMinutes = ((prevTime.seconds % 60) + 1) >= 60
+					? prevTime.minutes + 1
+					: prevTime.minutes;
+
+				return { minutes: newMinutes, seconds: newSeconds };
+			});
+		}, 1000);
+
+	return () => clearInterval(intervalId);
+}, []);
+
+  const formatTime = (time) => {
+		const timeSeconds = time.seconds % 60;
+    return `${time.minutes}:${timeSeconds < 10 ? '0' : ''}${timeSeconds}`;
+  };
 
 	const handleClick = (e) => {
 		const rect = e.target.getBoundingClientRect();
@@ -18,7 +37,7 @@ export default function MainImage() {
 					...p,
 					coordinates: { x, y },
 					element: (
-						<GuessingArea coords={{x, y}}/>
+						<GuessingArea coords={{x, y}} time={time}/>
 					),
 		}));
 	}
@@ -45,7 +64,8 @@ export default function MainImage() {
 		<>
 			<div className="container"  >
 				<div className="chronometer">
-					<Chronometer />
+					<h1>Timer</h1>
+					<p>{formatTime(time)}</p>
 				</div>
 				{square && square.element}
 				<img src={waldo} onClick={(e) => handleClick(e)}/>
