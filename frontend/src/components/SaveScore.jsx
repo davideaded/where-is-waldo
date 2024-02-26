@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from './Modal.jsx';
 import AllScores from './AllScores.jsx';
 import '../styles/savescore.css';
+import { apiUrl } from '../config/apiConfig.js';
 
 export default function SaveScore({time}) {
 	const [modalState, setModalState] = useState({isOpen: true, isCorrect: true});
@@ -15,7 +16,7 @@ export default function SaveScore({time}) {
   };
 
 	const handleSubmition = () => {
-		const url = 'http://localhost:3000/api/players'
+		const url = `${apiUrl}/api/players`;
 
 		fetch(url, {
 			method: 'POST',
@@ -30,7 +31,7 @@ export default function SaveScore({time}) {
 				}
 				throw new Error('Network response was not ok');
 			})
-			.then((data) => {
+			.then(() => {
 				setPostStatus("Score saved!");
 			})
 			.catch((error) => {

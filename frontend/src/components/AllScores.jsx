@@ -1,12 +1,13 @@
 import '../styles/allscores.css';
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../config/apiConfig.js';
 
 export default function AllScores() {
 	const [scores, setScores] = useState([]);
 	const [error, setError] = useState(false);
 
 useEffect(() => {
-  const url = "http://localhost:3000/api/players";
+  const url = `${apiUrl}/api/players/`;
 
   fetch(url)
     .then((response) => {
