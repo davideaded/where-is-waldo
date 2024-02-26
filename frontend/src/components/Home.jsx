@@ -2,13 +2,10 @@ import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import Characters from './Characters.jsx';
 import Chronometer from './Chronometer.jsx';
-import SaveScore from './SaveScore.jsx';
+import AllScores from './AllScores.jsx';
 import '../styles/home.css';
 
 export default function Home() {
-	useEffect(() => {
-		fetch("http://localhost:3000").then(r => console.log(r.body));
-	}, [])
 
 	return (
 		<div className="homemain">
@@ -18,7 +15,7 @@ export default function Home() {
 			<Link to="game">
 				<button>Play</button>
 			</Link>
-		<SaveScore />
+			<AllScores />
 		</div>
 	)
 	

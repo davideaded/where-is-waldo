@@ -2,16 +2,28 @@ table {
 	background-color: whitesmoke;
 	font-size: 30px;
 	margin: 14px auto;
-	border: 2px solid black;
-  border-collapse: separate;
-  border-spacing: 10px;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 50px
 }
 
 thead {
+	color: white;
+	background-color: #171717;
+}
+
+td {
+	color: #171717;
+	text-align: left;
+	border-bottom: 2px solid black;
+	padding: 8px;
+}
+
+tr td:first-child {
+	font-weight: 900;
 	color: black;
 }
 
-table td {
-	color: black;
+tr td:last-child {
+	text-align: right;
 }

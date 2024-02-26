@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 export default function AllScores() {
 	const [scores, setScores] = useState([]);
+	const [error, setError] = useState(false);
 
 useEffect(() => {
   const url = "http://localhost:3000/api/players";
@@ -18,12 +19,17 @@ useEffect(() => {
 			const sortedScores = [...data].sort((a, b) => a.completion_time_in_seconds - b.completion_time_in_seconds);
 			setScores(sortedScores)
 		})
-    .catch((error) => console.error(error));
+
+    .catch((e) => {
+			console.error(e)
+			setError(true);
+		});
 }, []);
 
 	function formatTime(seconds) {
 		const minutes = Math.floor(seconds / 60);
 		const remainingSeconds = seconds % 60;
+		const milliseconds = seconds * 1;
 
 		const formattedTime = `${minutes}m${remainingSeconds}s`;
 
@@ -39,7 +45,9 @@ useEffect(() => {
 			</thead>
 
 			<tbody>
-				{scores.map((row, index) => (
+				{error ? <h2 style={{color: "red"}}>Could not fetch scores</h2> 
+					:
+				scores.map((row, index) => (
 					<tr key={row.id}>
 						<td>{index+1}</td>
 						<td>{row.name}</td>

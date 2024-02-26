@@ -2,25 +2,17 @@ import waldo from '../assets/waldo2.jpg';
 import '../styles/mainimage.css';
 import { useState } from 'react';
 import GuessingArea from './GuessingArea.jsx';
+import Chronometer from './Chronometer.jsx';
 
 export default function MainImage() {
 	const [square, setSquare] = useState({});
 	const squareSize = 56;
-	const moonCoordinates = { x: 246, y: 134 };
 
 
 	const handleClick = (e) => {
 		const rect = e.target.getBoundingClientRect();
 		const {clientX, clientY} = e;
 		const {x, y} = getCoordinates(clientX, clientY, rect);
-
-
-		if (isCoordinateInsideSquare(x, y, moonCoordinates)) {
-			setSquare({});
-			return;
-		}
-
-		console.log(x, y);
 
 		setSquare((p) => ({
 					...p,
@@ -49,21 +41,12 @@ export default function MainImage() {
     return { x, y };
   };
 
-  const isCoordinateInsideSquare = (x, y, square) => {
-		square.x -= squareSize/2;
-		square.y -= squareSize/2;
-
-    return (
-      x >= square.x &&
-      x <= square.x + squareSize &&
-      y >= square.y &&
-      y <= square.y + squareSize
-    );
-  };
-
 	return (
 		<>
 			<div className="container"  >
+				<div className="chronometer">
+					<Chronometer />
+				</div>
 				{square && square.element}
 				<img src={waldo} onClick={(e) => handleClick(e)}/>
 			</div>

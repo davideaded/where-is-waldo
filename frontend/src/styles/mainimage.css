@@ -4,6 +4,17 @@
 	width: 80%;
 }
 
+.chronometer {
+	padding: 50px;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.chronometer p {
+	font-size: 30px;
+}
 .container img {
 	width: 100%;
 }

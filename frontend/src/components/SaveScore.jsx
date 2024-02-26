@@ -6,6 +6,7 @@ import '../styles/savescore.css';
 export default function SaveScore() {
 	const [modalState, setModalState] = useState({isOpen: true, isCorrect: true});
 	const [name, setName] = useState('');
+	const [postStatus, setPostStatus] = useState('');
 
   const handleCloseModal = () => {
 		setModalState(p => {
@@ -30,10 +31,11 @@ export default function SaveScore() {
 				throw new Error('Network response was not ok');
 			})
 			.then((data) => {
-				console.log('POST request successful');
+				setPostStatus("Score saved!");
 			})
 			.catch((error) => {
 				console.error('Error during POST request:', error);
+				setPostStatus("Could not save status");
 			});
 	}
 
@@ -52,9 +54,11 @@ export default function SaveScore() {
 				onChange={handleInputChange}
 				name="name" 
 				type="text" 
+				required
 			/>
 			<button className="submitNameBtn" onClick={() => handleSubmition()}>Submit</button>
 
+			{postStatus && <p>{postStatus}</p>}
 			<p>{modalState.text}</p>
 			<AllScores />
 		</Modal>

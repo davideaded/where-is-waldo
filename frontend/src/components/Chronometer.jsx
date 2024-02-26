@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Chronometer() {
-  const [time, setTime] = useState({ seconds: 0, milliseconds: 0 });
+  const [time, setTime] = useState({ minutes: 0, seconds: 0 });
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
@@ -9,24 +9,22 @@ export default function Chronometer() {
 
 			const intervalId = setInterval(() => {
 				setTime(prevTime => {
-					const newMilliseconds = (prevTime.milliseconds + 100) % 1000;
-					const newSeconds =
-						prevTime.milliseconds + 100 >= 1000
-							? prevTime.seconds + 1
-							: prevTime.seconds;
+					const newSeconds = prevTime.seconds + 1;
+					const newMinutes = ((prevTime.seconds % 60) + 1) >= 60
+						? prevTime.minutes + 1
+						: prevTime.minutes;
 
-					return { seconds: newSeconds, milliseconds: newMilliseconds };
+					return { minutes: newMinutes, seconds: newSeconds };
 				});
-			}, 100);
+			}, 1000);
 
 			return () => clearInterval(intervalId);
 		}
   }, [isRunning]);
 
   const formatTime = (time) => {
-    const minutes = Math.floor(time.seconds / 60);
-    const seconds = time.seconds % 60;
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}.${time.milliseconds}`;
+		const timeSeconds = time.seconds % 60;
+    return `${time.minutes}:${timeSeconds < 10 ? '0' : ''}${timeSeconds}`;
   };
 
   return (
