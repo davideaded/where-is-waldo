@@ -2,6 +2,7 @@ import { useState } from 'react';
 import '../styles/guessingarea.css';
 import Modal from './Modal.jsx';
 import SaveScore from './SaveScore.jsx';
+import { apiUrl } from '../config/apiConfig.js';
 
 export default function GuessingArea({coords, time}) {
 	const [modalState, setModalState] = useState({isOpen: false, isCorrect: false});
@@ -17,7 +18,7 @@ export default function GuessingArea({coords, time}) {
 
 	const fetchGuessResponse = async (character, coords) => {
 		const { guessCoordsX, guessCoordsY } = coords;
-		const url = `http://localhost:3000/api/guesses?character_guess=${character}&x=${guessCoordsX}&y=${guessCoordsY}`;
+		const url = `${apiUrl}/api/guesses?character_guess=${character}&x=${guessCoordsX}&y=${guessCoordsY}`;
 
 		try {
 			const response = await fetch(url);
